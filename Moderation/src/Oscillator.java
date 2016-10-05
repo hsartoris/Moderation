@@ -1,17 +1,21 @@
 
 public class Oscillator extends SoundGenerator {
 
+	private double amplitude = 0;
+	
 	private Waveform wf;
 	public Oscillator() {
 		// by default just create default instance of waveform
+		amplitude = (double) Byte.MAX_VALUE;
 		wf = new Waveform();
 	}
 	
-	public double[] testGet(double hz) {
-		double[] output = new double[(int) (SAMPLERATE)];
+	public byte[] testGet(double hz) {
+		byte[] output = new byte[(int) (SAMPLERATE)];
 		for (int i = 0; i < output.length; i++) {
-			//output[i] = wf.sine((i * hz)/(SAMPLERATE * Waveform.PERIOD));
-			output[i] = 1;
+			//System.out.print(wf.sine((i * hz)/(SAMPLERATE * Waveform.PERIOD)) + ": ");
+			output[i] = (byte) (amplitude * wf.sine((i * hz)/(SAMPLERATE * Waveform.PERIOD)));
+			//System.out.print(output[i] + "; ");
 		}
 		return output;
 	}
